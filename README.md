@@ -45,7 +45,7 @@ Hydra also implements a basic way to create a new object.
 
 ```ts
 import hydra from '@AceLikesGhosts/hydra';
-import type { IExportOBJ } from '@AceLikesGhosts/hydra';
+import type { IExport } from '@AceLikesGhosts/hydra';
 
 const hydr = (hydra() as IExport).create();
 hydr.set('foo', 'bar');
