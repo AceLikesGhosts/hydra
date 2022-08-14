@@ -5,7 +5,9 @@ a simple, fast, and flexible way to modify your Javascript objects.
 ## Installation
 
 ```bash
-npm install hydra
+# add or something, upload to npm
+# or something idk man
+# kill me
 ```
 
 ## Usage
