@@ -12,58 +12,67 @@ a simple, fast, and flexible way to modify your Javascript objects.
 
 ## Usage
 
-```javascript
-const hydra = require('hydra');
+```ts
+import hydra from '@AceLikesGhosts/hydra';
+import type { IExportOBJ } from '@AceLikesGhosts/hydra';
 
-const obj = {
-  foo: 'bar',
+const obj: any = {
+  foo: 'bar', 
   baz: 'qux'
 };
 
-const newObj = hydra()
+const newObj: IExportOBJ = hydra(obj)
+  .set('baz', 'quux')
   .set('foo', 'bar')
-  .set('baz', 'qux')
   .value();
 
-// New object and original object are the same.
-console.log(newObj === obj); // true
+// The base OBJ and newOBJ are not the same object.
+console.log(newObj); // { foo: 'bar', baz: 'quux' }
+console.log(obj); // { foo: 'bar', baz: 'quux' }
 
-const tempObj = hydra(obj)
-  .set('foo', 'qux')
-  .set('baz', 'bar')
-  .value();
+// To make them the same object use the .apply() method, which will
+// make the base object equal to the new object.
 
-// Original object is not modified by the temporary object.
-console.log(obj); // { foo: 'bar', baz: 'qux' }
-console.log(tempObj); // { foo: 'qux', baz: 'bar' }
-
-// If you want it to be modified, use the `apply` method.
 hydra(obj)
-  .set('foo', 'qux')
-  .set('baz', 'bar')
+  .set('baz', 'quux')
+  .set('foo', 'bar')
   .apply()
-  .value();
+  .value(); // Value is required to get the new object / the object hydra is working on.
 
-console.log(obj); // { foo: 'qux', baz: 'bar' }
+console.log(obj); // { foo: 'bar', baz: 'quux' }
+console.log(newObj); // { foo: 'bar', baz: 'quux' }
 ```
 
-We also implement an easy way to use hydra with callbacks.
+Hydra also implements a basic way to create a new object.
 
-```javascript
-const hydra = require('hydra');
+```ts
+import hydra from '@AceLikesGhosts/hydra';
+import type { IExportOBJ } from '@AceLikesGhosts/hydra';
 
-function callback(stuff) {
-    // do whatever ...
-    return [null, 0];
+const hydr = (hydra() as IExport).create();
+hydr.set('foo', 'bar');
+hydr.set('baz', 'qux');
+
+console.log(hydr.value()); // { foo: 'bar', baz: 'qux' }
+```
+
+Hydra also implements a basic utility function for callbacks.
+
+```ts
+import hydra from '@AceLikesGhosts/hydra';
+import type { IExportOBJ } from '@AceLikesGhosts/hydra';
+
+// Our basic callback, which returns null for error
+// and 0 for arg0
+function callback(stuff: any): any[]
+{
+  // Do whatever you need to do here.
+  return [null, 0];
 }
 
-// Callback is a function on the callback object, which will return the values of the callback.
-hydra().callback(callback, (err, result) => {
-    // do whatever...
-
-    if(err) 
-        // do whatever...
-
-    // do whatever...
+hydra().callback(callback, (err: unknown, arg0: number) =>
+{
+  // Do whatever you need to do here.
+  console.log(arg0); // 0
 });
 ```

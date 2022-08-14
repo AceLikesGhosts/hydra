@@ -1,6 +1,11 @@
 import constants from '../util/constants';
 
-function set(key: string, value: any)
+/**
+ * @description Sets the value of the object.
+ * @param {String} key The key to set. 
+ * @param {any} value The value to set.
+ */
+function set(key: string, value: any): void
 {
     let obj: Object | null = constants.OBJECT || null;
 
