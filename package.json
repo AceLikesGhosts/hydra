@@ -1,13 +1,13 @@
 {
-  "name": "hydra",
+  "name": "@acelikesghosts/hydra",
   "version": "1.0.0",
-  "description": "",
+  "description": "a simple, fast, and flexible way to modify your Javascript objects.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "AceLikesGhosts",
   "license": "ISC",
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^5.33.0",
@@ -20,5 +20,16 @@
     "@types/jest": "^28.1.6",
     "jest": "^28.1.3",
     "ts-jest": "^28.0.7"
-  }
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AceLikesGhosts/hydra.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AceLikesGhosts/hydra/issues"
+  },
+  "homepage": "https://github.com/AceLikesGhosts/hydra#readme"
 }
