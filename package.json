@@ -4,7 +4,10 @@
   "description": "a simple, fast, and flexible way to modify your Javascript objects.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest ./tests",
+    "build": "tsc ./src",
+    "watch": "tsc -w ./src",
+    "publish": "npm run build && npm publish"
   },
   "keywords": [],
   "author": "AceLikesGhosts",
