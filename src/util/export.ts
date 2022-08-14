@@ -7,7 +7,7 @@ import create from '../object/create';
 import constants from './constants';
 import type { IExportOBJ, IExport } from './export.interface';
 
-function exportObject(obj?: Object): IExportOBJ | IExport
+function exportObject(obj?: Object): IExportOBJ | IExport 
 {
     if(obj)
     {

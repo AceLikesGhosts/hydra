@@ -5,9 +5,7 @@ a simple, fast, and flexible way to modify your Javascript objects.
 ## Installation
 
 ```bash
-# add or something, upload to npm
-# or something idk man
-# kill me
+npm i @acelikesghosts/hydra
 ```
 
 ## Usage
