@@ -39,6 +39,16 @@ hydra(obj)
 
 console.log(obj); // { foo: 'bar', baz: 'quux' }
 console.log(newObj); // { foo: 'bar', baz: 'quux' }
+
+// The value method can be passed a callback function, which will be called with the object
+// hydra is working on.
+
+hydra(obj)
+  .set('baz', 'quux')
+  .set('foo', 'bar')
+  .value((obj) => {
+    console.log(obj); // { foo: 'bar', baz: 'quux' }
+  });
 ```
 
 Hydra also implements a basic way to create a new object.
@@ -58,7 +68,6 @@ Hydra also implements a basic utility function for callbacks.
 
 ```ts
 import hydra from '@AceLikesGhosts/hydra';
-import type { IExportOBJ } from '@AceLikesGhosts/hydra';
 
 // Our basic callback, which returns null for error
 // and 0 for arg0
