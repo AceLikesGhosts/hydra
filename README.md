@@ -1,6 +1,6 @@
 # Hydra
 
-a simple, fast, and flexible way to modify your Javascript objects.
+a simple, fast, and flexible way to modify your JavaScript objects.
 
 ## Installation
 
