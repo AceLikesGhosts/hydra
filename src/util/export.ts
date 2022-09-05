@@ -4,6 +4,7 @@ import set from '../object/set';
 import value from '../object/value';
 import get from '../object/get';
 import create from '../object/create';
+import print from '../object/print';
 import constants from './constants';
 import type { IExportOBJ, IExport } from './export.interface';
 
@@ -19,7 +20,8 @@ function exportObject(obj?: Object): IExportOBJ | IExport
                 set: set,
                 get: get,
                 apply: apply,
-                callback: callback
+                callback: callback,
+                print: print
             };
     }
 
