@@ -1,11 +1,11 @@
 {
   "name": "@acelikesghosts/hydra",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "a simple, fast, and flexible way to modify your Javascript objects.",
   "main": "index.js",
   "scripts": {
     "test": "jest ./tests",
-    "build": "tsc ./src",
+    "build": "tsc ./src --project ./",
     "watch": "tsc -w ./src",
     "publish": "npm run build && npm publish"
   },
