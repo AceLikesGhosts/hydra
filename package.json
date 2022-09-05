@@ -1,8 +1,8 @@
 {
   "name": "@acelikesghosts/hydra",
-  "version": "1.2.1",
+  "version": "1.2.3",
   "description": "a simple, fast, and flexible way to modify your Javascript objects.",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "scripts": {
     "test": "jest ./tests",
     "build": "tsc ./src --project ./",
@@ -10,12 +10,6 @@
     "publish": "npm run build && npm publish"
   },
   "types": "dist",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./src/index.ts"
-    }
-  },
   "keywords": [],
   "author": "AceLikesGhosts",
   "license": "ISC",
