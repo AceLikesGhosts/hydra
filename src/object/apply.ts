@@ -1,16 +1,24 @@
-import constants from '../util/constants';
+import { HydraObject } from '../types/hydraReturns';
+import hydra from '../hydra/hydra';
+import constants from '../constants';
+import create from './create';
+import unfreeze from './unfreeze';
 
-/**
- * @description Changes the base object to the new object, with all {@see set} and {@see value} calls being made to the new object.
- */
-function apply(): void
+function apply(): HydraObject
 {
-    const obj: Object | null = constants.OBJECT || null;
+    const wrappedObj: Record<string, unknown> | null = constants.wrappedObj;
+    const object: Record<string, unknown> | null = constants._obj;
 
-    if(!obj)
-        return;
+    if(!object || !wrappedObj)
+    {
+        console.error('No object was found, creating one.');
+        return create();
+    }
+    constants._obj = unfreeze(constants._obj!);
+    constants._obj = constants.wrappedObj;
 
-    constants._OBJ = obj;
+    return hydra<true>(object);
 }
+
 
 export default apply;

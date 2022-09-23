@@ -1,16 +1,8 @@
-import constants from '../util/constants';
+import constants from '../constants';
 
-/**
- * @description Returns the value of the object.
- * @param {Function} callback Optional callback that will be called with the object, or an empty object if the object is not found. 
- * @returns {Object} The object, or an empty object if the object is not found.
- */
-function value(callback?: Function): Object
+function value(): Record<string, unknown>
 {
-    if(callback)
-        callback(constants.OBJECT || {});
-
-    return constants.OBJECT || {};
+    return constants.wrappedObj as Record<string, unknown>;
 }
 
 export default value;

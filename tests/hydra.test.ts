@@ -1,32 +1,51 @@
-import hydra from '../src/hydra/hydra';
-import { IExport, IExportOBJ } from '../src/util/export.interface';
-import IExampleObject from './obj.interface';
+import hydra, { HydraObject } from '../src/';
 
-test('can create hydra instance w/ object', () =>
+describe('hydra tests', () =>
 {
-    const obj: IExampleObject = {
-        a: 1,
-        b: 2,
-    };
+    test('set func', () =>
+    {
+        const val: Record<string, unknown> = hydra<false>()
+            .create()
+            .set<string, string>('test', 'test1')
+            .value();
 
-    const hydraObj: IExport | IExportOBJ = hydra(obj);
+        expect(val.test).toBe('test1');
+    });
 
-    // check that hydraObj is an object with the correct properties
-    expect(hydraObj).toBeInstanceOf(Object);
+    test('get func', () =>
+    {
+        const val: [string, HydraObject] = hydra<false>()
+            .create()
+            .set<string, string>('test', 'test1')
+            .get<string, string>('test');
 
-    expect(hydraObj).toHaveProperty('set');
-    expect(hydraObj).toHaveProperty('get');
-    expect(hydraObj).toHaveProperty('callback');
-    expect(hydraObj).toHaveProperty('apply');
-    expect(hydraObj).toHaveProperty('value');
-});
+        expect(val[0]).toBe('test1');
+    });
 
-test('can create hydra instance wo/ object', () =>
-{
-    const hydraObj: IExport | IExportOBJ = hydra();
+    test('create func', () =>
+    {
+        const val: Record<string, unknown> = hydra<false>()
+            .create()
+            .value();
 
-    // check that hydraObj is an object with the correct properties
-    expect(hydraObj).toBeInstanceOf(Object);
+        expect(val).toEqual({});
+    });
 
-    expect(hydraObj).toHaveProperty('callback');
+    test('callback func', () =>
+    {
+        function base(): [boolean, () => void]
+        {
+            return [
+                true,
+                () => { return; }
+            ];
+        }
+
+        hydra<false>()
+            .callback(base, (bool: boolean, func: () => void) => 
+            {
+                expect(bool).toBe(true);
+                expect(func).toBeDefined();
+            });
+    });
 });

@@ -8,78 +8,35 @@ a simple, fast, and flexible way to modify your JavaScript objects.
 npm i @acelikesghosts/hydra
 ```
 
-## Usage
+## Examples
 
 ```ts
-import hydra from '@AceLikesGhosts/hydra';
-import type { IExportOBJ } from '@AceLikesGhosts/hydra';
+import hydra from 'hydra';
 
-const obj: any = {
-  foo: 'bar', 
-  baz: 'qux'
-};
+// False tells Hydra that we have not passed an object 
+// which will give us back our proper interface.
+hydra<false>()
+    .create()
+    .set('thing', 'thing2')
+    // { thing: 'thing2' }
+    .value();
 
-const newObj: IExportOBJ = hydra(obj)
-  .set('baz', 'quux')
-  .set('foo', 'bar')
-  .value();
+let value: Record<string, unknown>;
+const hydr = hydra<true>(value)
+    .set('thing', 'thing2');
 
-// The base OBJ and newOBJ are not the same object.
-console.log(newObj); // { foo: 'bar', baz: 'quux' }
-console.log(obj); // { foo: 'bar', baz: 'quux' }
+const hydrVal = hydr.value();
 
-// To make them the same object use the .apply() method, which will
-// make the base object equal to the new object.
+// value = undefined
+// hydrVal = { thing: thing'2 }
+// To set the object we pass to the object Hydra has modified
+// run .apply();
 
-hydra(obj)
-  .set('baz', 'quux')
-  .set('foo', 'bar')
-  .apply()
-  .value(); // Value is required to get the new object / the object hydra is working on.
+// Returns HydraObject, you can continue to dot chain.
+// value is now equal to { thing: 'thing2' }, which was what
+// we set previously
+hydr.apply(); 
 
-console.log(obj); // { foo: 'bar', baz: 'quux' }
-console.log(newObj); // { foo: 'bar', baz: 'quux' }
-
-// The value method can be passed a callback function, which will be called with the object
-// hydra is working on.
-
-hydra(obj)
-  .set('baz', 'quux')
-  .set('foo', 'bar')
-  .value((obj) => {
-    console.log(obj); // { foo: 'bar', baz: 'quux' }
-  });
-```
-
-Hydra also implements a basic way to create a new object.
-
-```ts
-import hydra from '@AceLikesGhosts/hydra';
-import type { IExport } from '@AceLikesGhosts/hydra';
-
-const hydr = (hydra() as IExport).create();
-hydr.set('foo', 'bar');
-hydr.set('baz', 'qux');
-
-console.log(hydr.value()); // { foo: 'bar', baz: 'qux' }
-```
-
-Hydra also implements a basic utility function for callbacks.
-
-```ts
-import hydra from '@AceLikesGhosts/hydra';
-
-// Our basic callback, which returns null for error
-// and 0 for arg0
-function callback(stuff: any): any[]
-{
-  // Do whatever you need to do here.
-  return [null, 0];
-}
-
-hydra().callback(callback, (err: unknown, arg0: number) =>
-{
-  // Do whatever you need to do here.
-  console.log(arg0); // 0
-});
+// true
+value === hydr.value()
 ```

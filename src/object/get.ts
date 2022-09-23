@@ -1,22 +1,19 @@
-import constants from '../util/constants';
+import { HydraObject } from '../types/hydraReturns';
+import constants from '../constants';
+import hydra from '../hydra/hydra';
+import create from './create';
 
-/**
- * @description Returns the value of the object at the given key.
- * @param {any} key Any key. 
- * @returns {any} The value of the object at the given key.
- */
-function get(key: any): any
+function get<T>(key: T): [unknown, HydraObject];
+function get<T, K>(key: T): [K, HydraObject];
+function get(key: any): [unknown, HydraObject]
 {
-    let obj: Object | null = constants.OBJECT || null;
+    const obj: Record<string, unknown> | null = constants.wrappedObj || null;
 
     if(!obj)
-    {
-        constants.OBJECT = {};
-        obj = constants.OBJECT;
-    }
+        create();
 
-    // @ts-ignore
-    return obj[key];
+    const data = obj![key];
+    return [data, hydra<true>(obj!)];
 }
 
 export default get;

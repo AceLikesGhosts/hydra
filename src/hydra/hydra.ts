@@ -1,18 +1,21 @@
-import type { IExport, IExportOBJ } from '../util/export.interface';
-import exportObject from '../util/export';
-import constants from '../util/constants';
+import type { HydraReturn } from '../types/hydraReturns';
+import constants from '../constants';
+import unfreeze from '../object/unfreeze';
+import handleReturns from './returns';
 
-function hydra(obj?: Object): IExport  | IExportOBJ
+
+function hydra<T extends boolean>(obj?: Record<string, unknown>): HydraReturn<T>
 {
+    constants._obj = obj || null;
+    constants.wrappedObj = obj ? new Object(obj) as Record<string, unknown> : null;
+
     if(obj)
     {
-        constants._OBJ = obj;
-        constants.OBJECT = new Object(obj);
-        
-        return exportObject(obj);
+        Object.freeze(constants._obj);
+        constants.wrappedObj = unfreeze(constants.wrappedObj!);
     }
 
-    return exportObject();
+    return handleReturns(obj);
 }
 
 
