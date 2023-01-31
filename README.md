@@ -1,3 +1,6 @@
+> **Another dead project that I gave up on. Please ignore this, it won't be updated.**
+
+
 # Hydra
 
 a simple, fast, and flexible way to modify your JavaScript objects.
